@@ -1,7 +1,7 @@
 <!--
   - MIT License
   -
-  - Copyright © 2020 dev-toolbox.org
+  - Copyright © 2020-2023 dev-toolbox.org
   -
   - Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files
   - (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish,
@@ -23,6 +23,7 @@ Task sytem with listeners, status change, messages. Both synchronous and asynchr
 
 history
 -------
+- v0.9.0 2023/01/29 : java 17
 - v0.8.3 2020/12/05 : upgraded util-exception to v8.0.0
 - v0.8.2 2020/04/29 : changed TaskException constructor with varargs
 - v0.8.1 2020/04/28 : cast getIdentifier to TaskErrorType in TaskException
