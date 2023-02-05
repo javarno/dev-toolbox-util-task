@@ -23,6 +23,7 @@ Task sytem with listeners, status change, messages. Both synchronous and asynchr
 
 history
 -------
+- v0.9.1 2023/02/05 : upgraded util-exception to v0.9.1
 - v0.9.0 2023/01/29 : java 17
 - v0.8.3 2020/12/05 : upgraded util-exception to v8.0.0
 - v0.8.2 2020/04/29 : changed TaskException constructor with varargs
