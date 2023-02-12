@@ -120,7 +120,7 @@ public abstract class SynchronousTask implements Task {
             return;
         }
         LOGGER.info("Task [{}] sending event for message [{}] to [{}] listeners ...", name, formattedMessage, listenersCount);
-        sendTaskMessageEvent(message);
+        sendTaskMessageEvent(formattedMessage);
     }
 
     protected void sendTaskMessageEvent(final String message) {
