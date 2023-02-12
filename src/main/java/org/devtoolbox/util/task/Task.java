@@ -61,8 +61,13 @@ public interface Task {
      * @throws NullPointerException if listener is null
      * @throws IllegalArgumentException if listener has not been registered
      */
-    public void removeTaskCompletionListener(final TaskCompletionListener listener);
+    void removeTaskCompletionListener(final TaskCompletionListener listener);
 
+    /**
+     * Gets the current task's status.
+     *
+     * @return the task status
+     */
     TaskStatus getStatus();
 
 }

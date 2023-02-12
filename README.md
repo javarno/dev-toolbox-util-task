@@ -23,10 +23,11 @@ Task sytem with listeners, status change, messages. Both synchronous and asynchr
 
 history
 -------
-- v0.9.1 2023/02/05 : upgraded util-exception to v0.9.1
-- v0.9.0 2023/01/29 : java 17
-- v0.8.3 2020/12/05 : upgraded util-exception to v8.0.0
-- v0.8.2 2020/04/29 : changed TaskException constructor with varargs
-- v0.8.1 2020/04/28 : cast getIdentifier to TaskErrorType in TaskException
-- v0.8.0 2020/04/21 : java 14
+- v0.10.0 2023/02/12 : added task listener implementation forwarding to slf4j and sendError method for generic exceptions
+- v0.9.1  2023/02/05 : upgraded util-exception to v0.9.1
+- v0.9.0  2023/01/29 : java 17
+- v0.8.3  2020/12/05 : upgraded util-exception to v8.0.0
+- v0.8.2  2020/04/29 : changed TaskException constructor with varargs
+- v0.8.1  2020/04/28 : cast getIdentifier to TaskErrorType in TaskException
+- v0.8.0  2020/04/21 : java 14
 - previous versions : history lost :)

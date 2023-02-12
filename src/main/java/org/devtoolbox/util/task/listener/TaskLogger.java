@@ -17,24 +17,25 @@
 package org.devtoolbox.util.task.listener;
 
 import org.devtoolbox.util.task.error.TaskException;
-import org.devtoolbox.util.task.status.TaskStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
+ * Task listener implementation forwarding messages and errors to SLF4J API.
+ *
  * @author Arnaud Lecollaire
  */
-public interface TaskListener {
+public class TaskLogger implements TaskListener {
 
-	public default void handleTaskStatusChange(final TaskStatus oldStatus, final TaskStatus newStatus) {
-        handleTaskMessage("Task status changed from [" + oldStatus + "] to [" + newStatus + "].");
+	private static final Logger LOGGER = LoggerFactory.getLogger(TaskLogger.class);
+
+
+	public void handleTaskMessage(final String message) {
+    	LOGGER.info(message);
     }
 
-    public default void handleTaskMessage(final String message) {}
-
-    public default void handleTaskErrorMessage(final String message) {
-        handleTaskMessage("ERROR: " + message);
+    public void handleTaskError(final TaskException error) {
+    	LOGGER.error("task error", error);
     }
-
-    public default void handleTaskError(final TaskException error) {}
-
 }

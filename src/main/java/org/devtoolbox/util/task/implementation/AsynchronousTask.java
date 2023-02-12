@@ -20,6 +20,8 @@ import org.devtoolbox.util.task.error.TaskErrorType;
 import org.devtoolbox.util.task.error.TaskException;
 import org.devtoolbox.util.task.status.TaskEndStatus;
 import org.devtoolbox.util.task.status.TaskStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
@@ -31,6 +33,8 @@ import javafx.beans.value.ObservableValue;
  */
 public abstract class AsynchronousTask extends SynchronousTask {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AsynchronousTask.class);
+
     private final ReadOnlyBooleanWrapper configurationValidProperty = new ReadOnlyBooleanWrapper(true);
     private final Long timeout = null;
 
@@ -41,6 +45,7 @@ public abstract class AsynchronousTask extends SynchronousTask {
 
     @Override
     protected void startTask() {
+    	LOGGER.info("Starting background thread for {}.", this);
         new Thread() {
             @Override
             public void run() {
@@ -113,5 +118,10 @@ public abstract class AsynchronousTask extends SynchronousTask {
 
     public void setConfigurationValid(final boolean configurationValid) {
         configurationValidProperty.set(configurationValid);
+    }
+
+    @Override
+    public String toString() {
+    	return "Asynchronous task [" + getName() + "]";
     }
 }

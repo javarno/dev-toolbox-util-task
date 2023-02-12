@@ -148,7 +148,10 @@ public abstract class SynchronousTask implements Task {
     }
 
     protected void sendError(final TaskErrorType errorType, final Exception error, final Object...parameters) {
-        Objects.requireNonNull(errorType);
+        sendError(new TaskException(errorType, error, parameters));
+    }
+
+    protected void sendError(final Exception error) {
         Objects.requireNonNull(error);
         final int listenersCount = taskListeners.size();
         if (listenersCount == 0) {
@@ -159,8 +162,11 @@ public abstract class SynchronousTask implements Task {
         if (status == TaskStatus.STARTED) {
             executionFailed = true;
         }
-        final TaskException exception = new TaskException(errorType, error, parameters);
-        sendTaskException(exception);
+        if (error instanceof TaskException taskException) {
+        	sendTaskException(taskException);
+        } else {
+        	sendTaskException(new TaskException(TaskErrorType.TASK_EXECUTION_FAILED, error));
+        }
     }
 
     protected void sendTaskException(final TaskException exception) {
@@ -283,5 +289,10 @@ public abstract class SynchronousTask implements Task {
                 action.run();
             }
         };
+    }
+
+    @Override
+    public String toString() {
+    	return "Synchronous task [" + getName() + "]";
     }
 }
