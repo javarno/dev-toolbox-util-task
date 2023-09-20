@@ -32,6 +32,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.helpers.MessageFormatter;
 
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+
 
 /**
  * @author Arnaud Lecollaire
@@ -44,7 +47,7 @@ public abstract class SynchronousTask implements Task {
     private final Collection<TaskCompletionListener> completionListeners = new ArrayList<>();
 
     private final String name;
-    private TaskStatus status = TaskStatus.CREATED;
+    private ReadOnlyObjectWrapper<TaskStatus> statusProperty = new ReadOnlyObjectWrapper<>(TaskStatus.CREATED);
     private boolean executionFailed = false;
     private boolean stopAsked = false;
 
@@ -63,8 +66,8 @@ public abstract class SynchronousTask implements Task {
     }
 
     @Override
-    public TaskStatus getStatus() {
-        return status;
+    public ReadOnlyObjectProperty<TaskStatus> statusProperty() {
+    	return statusProperty.getReadOnlyProperty();
     }
 
     protected boolean isStopAsked() {
@@ -76,12 +79,12 @@ public abstract class SynchronousTask implements Task {
     }
 
     public void setStatus(final TaskStatus newStatus) {
-        final TaskStatus oldStatus = status;
+    	final TaskStatus oldStatus = statusProperty.get();
         if (oldStatus == newStatus) {
             return;
         }
         LOGGER.info("Changing status for task [{}] from [{}] to [{}].", name, oldStatus, newStatus);
-        status = newStatus;
+        statusProperty.set(newStatus);
         sendStatusChange(oldStatus, newStatus);
     }
 
@@ -154,7 +157,8 @@ public abstract class SynchronousTask implements Task {
     protected void sendError(final Exception error) {
         Objects.requireNonNull(error);
         final int listenersCount = taskListeners.size();
-        if (listenersCount == 0) {
+        TaskStatus status = statusProperty.get();
+		if (listenersCount == 0) {
             LOGGER.error("An error occured during the [{}] status of the action [{}], but no listeners are registered to receive the error.", status, name, error);
             return;
         }

@@ -30,9 +30,4 @@ public class TaskException extends ParametricCheckedException {
     public TaskException(final TaskErrorType identifier, final Exception error, final Object...parameters) {
         super(identifier, error, parameters);
     }
-
-    @Override
-    public TaskErrorType getIdentifier() {
-        return (TaskErrorType) super.getIdentifier();
-    }
 }

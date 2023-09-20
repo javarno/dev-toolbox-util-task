@@ -20,6 +20,8 @@ import org.devtoolbox.util.task.listener.TaskCompletionListener;
 import org.devtoolbox.util.task.listener.TaskListener;
 import org.devtoolbox.util.task.status.TaskStatus;
 
+import javafx.beans.property.ReadOnlyObjectProperty;
+
 
 /**
  * Generic task interface.
@@ -68,6 +70,15 @@ public interface Task {
      *
      * @return the task status
      */
-    TaskStatus getStatus();
+    default TaskStatus getStatus() {
+    	return statusProperty().get();
+    }
+
+    /**
+     * Gets the task's status property. This property is read-only. The status should always be changed by the task itself, not by an external call.
+     *
+     * @return the task status property
+     */
+    ReadOnlyObjectProperty<TaskStatus> statusProperty();
 
 }

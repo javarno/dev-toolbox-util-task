@@ -23,11 +23,11 @@ import org.devtoolbox.util.exception.ErrorIdentifier;
  * @author Arnaud Lecollaire
  */
 public enum TaskErrorType implements ErrorIdentifier {
-	TASK_INITIALIZATION_FAILED("Task [{}] : initialization failed"),
-	LISTENER_NOTIFICATION_FAILED("An error occured while sending a notification to a listener for task [{}]."),
-	TASK_EXECUTION_FAILED("Task [{}] : execution failed"),
-	TASK_CLEANING_FAILED("Task [{}] : cleaning failed"),
-	ERROR_IN_TIMEOUT_MONITOR("Task [{}] : error while trying to monitor task for timeout");
+	TASK_INITIALIZATION_FAILED("Task [{0}] : initialization failed"),
+	LISTENER_NOTIFICATION_FAILED("An error occured while sending a notification to a listener for task [{0}]."),
+	TASK_EXECUTION_FAILED("Task [{0}] : execution failed"),
+	TASK_CLEANING_FAILED("Task [{0}] : cleaning failed"),
+	ERROR_IN_TIMEOUT_MONITOR("Task [{0}] : error while trying to monitor task for timeout");
 
 	private final String defaultMessage;
 

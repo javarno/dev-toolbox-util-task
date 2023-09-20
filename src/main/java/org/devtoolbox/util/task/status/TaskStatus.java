@@ -25,7 +25,7 @@ public enum TaskStatus {
 	CREATED,
 	/** all required parameters have been defined for this task (they can still change before it's started, but in its current state, the task can start) */
 	INITIALIZED,
-	/** task is starting, it may perform some initialization () before actually starting to work */
+	/** task is starting, it may perform some initialization before actually starting to work */
 	STARTING,
 	/** task is currently working */
 	STARTED,
