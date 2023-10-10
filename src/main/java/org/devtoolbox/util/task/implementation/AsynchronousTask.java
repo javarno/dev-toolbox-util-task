@@ -46,12 +46,7 @@ public abstract class AsynchronousTask extends SynchronousTask {
     @Override
     protected void startTask() {
     	LOGGER.info("Starting background thread for {}.", this);
-        new Thread() {
-            @Override
-            public void run() {
-                AsynchronousTask.super.startTask();
-            }
-        }.start();
+        new Thread(() -> AsynchronousTask.super.startTask()).start();
         if (timeout != null) {
             new Thread(() -> {
                 try {
@@ -70,39 +65,35 @@ public abstract class AsynchronousTask extends SynchronousTask {
 
     @Override
     public void sendTaskMessage(final String message, final Object...parameters) {
-        doInResultThread(() -> super.sendTaskMessage(message, parameters));
+        internalExecuteInResultThread(() -> super.sendTaskMessage(message, parameters));
     }
 
     @Override
     protected void sendTaskStatusEvent(final TaskStatus oldStatus, final TaskStatus newStatus) {
-        doInResultThread(() -> super.sendTaskStatusEvent(oldStatus, newStatus));
+        internalExecuteInResultThread(() -> super.sendTaskStatusEvent(oldStatus, newStatus));
     }
 
     @Override
     protected void sendTaskCompletionEvent(final TaskEndStatus executionStatus) {
-        doInResultThread(() -> super.sendTaskCompletionEvent(executionStatus));
+        internalExecuteInResultThread(() -> super.sendTaskCompletionEvent(executionStatus));
     }
 
     @Override
     protected void sendTaskException(final TaskException exception) {
-        doInResultThread(() -> super.sendTaskException(exception));
+        internalExecuteInResultThread(() -> super.sendTaskException(exception));
     }
 
-    protected void doInResultThread(final Runnable runnable) {
+    protected void internalExecuteInResultThread(final Runnable runnable) {
         if (isInResultThread()) {
             runnable.run();
         } else {
-            sendToResultThread(runnable);
+            executeInResultThread(runnable);
         }
     }
 
-    protected boolean isInResultThread() {
-        return true;
-    }
+    protected abstract boolean isInResultThread();
 
-    protected void sendToResultThread(final Runnable runnable) {
-        runnable.run();
-    }
+    protected abstract void executeInResultThread(final Runnable runnable);
 
     public ReadOnlyBooleanProperty configurationValidProperty() {
         return configurationValidProperty.getReadOnlyProperty();

@@ -16,6 +16,7 @@
  */
 package org.devtoolbox.util.task.implementation;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
@@ -30,7 +31,6 @@ import org.devtoolbox.util.task.status.TaskEndStatus;
 import org.devtoolbox.util.task.status.TaskStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.helpers.MessageFormatter;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -113,7 +113,7 @@ public abstract class SynchronousTask implements Task {
         Objects.requireNonNull(message);
         final String formattedMessage;
         if ((parameters != null) && (parameters.length > 0)) {
-            formattedMessage = MessageFormatter.arrayFormat(message, parameters).getMessage();
+            formattedMessage = MessageFormat.format(message, parameters);
         } else {
             formattedMessage = message;
         }

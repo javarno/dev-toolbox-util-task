@@ -15,10 +15,7 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/**
- * @author Arnaud Lecollaire
- */
-package org.devtoolbox.util.task;
+package org.devtoolbox.util.task.test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.devtoolbox.util.task.Task;
 import org.devtoolbox.util.task.error.TaskException;
 import org.devtoolbox.util.task.implementation.SynchronousTask;
 import org.devtoolbox.util.task.listener.TaskCompletionListener;
@@ -43,6 +41,9 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 
+/**
+ * @author Arnaud Lecollaire
+ */
 public class SynchronousTaskTest {
 
     private static final TaskStatus[] LIFECYCLE_STATUS = new TaskStatus[] {

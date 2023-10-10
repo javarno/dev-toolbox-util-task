@@ -23,7 +23,8 @@ Task system with listeners, status change, messages. Both synchronous and asynch
 
 history
 -------
-- v0.11.0 2023-09-23 : java 21
+- v0.13.0 2023-10-10 : replaced MessageFormatter with java.text.MessageFormat / code clean-up
+- v0.12.0 2023-09-23 : java 21
 - v0.11.0 2023-09-20 :
   * upgraded [util-exception](https://github.com/javarno/dev-toolbox-util-exception) to v0.10.0
   * changed status to read-only property
